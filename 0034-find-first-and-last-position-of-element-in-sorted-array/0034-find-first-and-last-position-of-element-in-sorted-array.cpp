@@ -1,46 +1,33 @@
 class Solution {
 public:
-   vector<int> searchRange(vector<int>& a, int target) {
-	int s = 0, e = a.size()-1;
-	vector<int> ans(2, -1);
-	
-	while(s <= e){
-		int m = s + (e-s)/2;
-		if(a[m] < target)
-			s = m+1;
-		else if(a[m] > target)
-			e = m-1;
-		else{
-			if(m == s || a[m] != a[m-1]){
-				ans[0] = m;
-				break;
-			}
-			else{
-				e = m-1;
-				ans[0] = m-1;
-			}
-		}
-	}
-
-
-	s = 0, e = a.size()-1;
-	while(s <= e){
-		int m = s + (e-s)/2;
-		if(a[m] < target)
-			s = m+1;
-		else if(a[m] > target)
-			e = m-1;
-		else{
-			if(m == e || a[m] != a[m+1]){
-				ans[1] = m;
-				break;
-			}
-			else{
-				s = m+1;
-				ans[1] = m+1;
-			}
-		}
-	}
-	return ans; 
-}
+    vector<int> searchRange(vector<int>& nums, int target) {
+        
+        vector<int>arr;
+        int ans=-1,him=-1;
+        int l=0,h=nums.size()-1;
+        while(l<=h){
+            int mid=l+(h-l)/2;
+             
+            if(nums[mid]==target){
+                ans=mid;
+                h=mid-1;
+            }
+            else if(nums[mid]<target) l=mid+1;
+            else h=mid-1;
+        }
+        arr.push_back(ans);
+        
+        l=0,h=nums.size()-1;
+        while(l<=h){
+            int mid1=l+(h-l)/2;
+            if(nums[mid1]==target){
+                him=mid1;
+                l=mid1+1;
+            }
+            else if(nums[mid1]<target) l=mid1+1;
+            else h=mid1-1;
+        }
+        arr.push_back(him);
+        return arr;
+    }
 };
